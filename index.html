@@ -13,22 +13,10 @@
       line-height: 1.5;
       padding: 20px;
     }
-    .container {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    header h1 {
-      font-size: 28px;
-      color: #e67e22;
-      margin-bottom: 8px;
-    }
-    header p {
-      color: #666;
-    }
+    .container { max-width: 700px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 30px; }
+    header h1 { font-size: 28px; color: #e67e22; margin-bottom: 8px; }
+    header p { color: #666; }
     .produk {
       background: white;
       border-radius: 12px;
@@ -37,49 +25,45 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.06);
       border-left: 5px solid #e67e22;
     }
-    .produk h2 {
-      font-size: 18px;
-      color: #2c3e50;
-      margin-bottom: 6px;
+    .produk h2 { font-size: 18px; color: #2c3e50; margin-bottom: 6px; }
+    .harga { font-size: 20px; font-weight: bold; color: #27ae60; margin: 6px 0 12px; }
+    .label { font-size: 14px; color: #555; margin-bottom: 6px; display: block; }
+    select, input[type="number"] {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      margin-bottom: 12px;
     }
-    .harga {
-      font-size: 20px;
-      font-weight: bold;
-      color: #27ae60;
-      margin: 6px 0;
-    }
-    .rasa {
-      font-size: 14px;
-      color: #555;
-      background: #f1f1f1;
+    .tombol-wa {
       display: inline-block;
-      padding: 3px 10px;
-      border-radius: 20px;
-      margin-right: 6px;
-      margin-top: 4px;
-    }
-    .keterangan {
-      font-size: 13px;
-      color: #888;
-      margin-top: 6px;
-    }
-    .order-box {
       background: #25D366;
       color: white;
-      text-align: center;
-      padding: 18px;
-      border-radius: 12px;
-      margin-top: 30px;
-    }
-    .order-box a {
-      color: white;
+      padding: 10px 18px;
       text-decoration: none;
+      border-radius: 8px;
       font-weight: bold;
-      font-size: 18px;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+    }
+    .tombol-wa:hover { background: #1da851; }
+    .info-kirim {
+      background: #fff3cd;
+      border: 1px solid #ffecb5;
+      color: #856404;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin: 25px 0 10px;
+      font-size: 14px;
+      text-align: center;
     }
     footer {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 20px;
       color: #999;
       font-size: 14px;
     }
@@ -92,55 +76,116 @@
       <p>Cemilan renyah, enak, dan fresh setiap hari</p>
     </header>
 
+    <!-- Keripik Pangsit -->
     <div class="produk">
       <h2>Keripik Pangsit</h2>
       <div class="harga">Rp 7.000</div>
-      <span class="rasa">Asin</span>
-      <span class="rasa">Sedang</span>
-      <span class="rasa">Pedas</span>
+      <label class="label">Pilih Rasa:</label>
+      <select id="rasa-pangsit">
+        <option value="Asin">Asin</option>
+        <option value="Sedang">Sedang</option>
+        <option value="Pedas">Pedas</option>
+      </select>
+      <label class="label">Jumlah:</label>
+      <input type="number" id="jumlah-pangsit" value="1" min="1">
+      <button class="tombol-wa" onclick="order('Keripik Pangsit', 'rasa-pangsit', 'jumlah-pangsit', 7000)">
+        💬 Order via WhatsApp
+      </button>
     </div>
 
+    <!-- Makroni Mekar -->
     <div class="produk">
       <h2>Makroni Mekar</h2>
       <div class="harga">Rp 7.000</div>
-      <span class="rasa">Asin</span>
-      <span class="rasa">Sedang</span>
-      <span class="rasa">Pedas</span>
+      <label class="label">Pilih Rasa:</label>
+      <select id="rasa-makroni">
+        <option value="Asin">Asin</option>
+        <option value="Sedang">Sedang</option>
+        <option value="Pedas">Pedas</option>
+      </select>
+      <label class="label">Jumlah:</label>
+      <input type="number" id="jumlah-makroni" value="1" min="1">
+      <button class="tombol-wa" onclick="order('Makroni Mekar', 'rasa-makroni', 'jumlah-makroni', 7000)">
+        💬 Order via WhatsApp
+      </button>
     </div>
 
+    <!-- Kerupuk Pelangi -->
     <div class="produk">
       <h2>Kerupuk Pelangi</h2>
       <div class="harga">Rp 13.000</div>
-      <span class="rasa">Chili Oil (Daun Jeruk)</span>
-      <div class="keterangan">Kerupuk bawang</div>
+      <label class="label">Rasa:</label>
+      <select id="rasa-kerupuk">
+        <option value="Chili Oil (Daun Jeruk)">Chili Oil (Daun Jeruk)</option>
+      </select>
+      <label class="label">Jumlah:</label>
+      <input type="number" id="jumlah-kerupuk" value="1" min="1">
+      <button class="tombol-wa" onclick="order('Kerupuk Pelangi', 'rasa-kerupuk', 'jumlah-kerupuk', 13000)">
+        💬 Order via WhatsApp
+      </button>
     </div>
 
+    <!-- Kentang Kering -->
     <div class="produk">
       <h2>Kentang Kering</h2>
       <div class="harga">Rp 23.000</div>
-      <span class="rasa">Asin</span>
-      <span class="rasa">Sedang</span>
-      <span class="rasa">Pedas</span>
+      <label class="label">Pilih Rasa:</label>
+      <select id="rasa-kentang">
+        <option value="Asin">Asin</option>
+        <option value="Sedang">Sedang</option>
+        <option value="Pedas">Pedas</option>
+      </select>
+      <label class="label">Jumlah:</label>
+      <input type="number" id="jumlah-kentang" value="1" min="1">
+      <button class="tombol-wa" onclick="order('Kentang Kering', 'rasa-kentang', 'jumlah-kentang', 23000)">
+        💬 Order via WhatsApp
+      </button>
     </div>
 
+    <!-- Stik Tales -->
     <div class="produk">
       <h2>Stik Tales</h2>
       <div class="harga">Rp 23.000</div>
-      <span class="rasa">Asin</span>
-      <span class="rasa">Sedang</span>
-      <span class="rasa">Pedas</span>
+      <label class="label">Pilih Rasa:</label>
+      <select id="rasa-stik">
+        <option value="Asin">Asin</option>
+        <option value="Sedang">Sedang</option>
+        <option value="Pedas">Pedas</option>
+      </select>
+      <label class="label">Jumlah:</label>
+      <input type="number" id="jumlah-stik" value="1" min="1">
+      <button class="tombol-wa" onclick="order('Stik Tales', 'rasa-stik', 'jumlah-stik', 23000)">
+        💬 Order via WhatsApp
+      </button>
     </div>
 
-    <div class="order-box">
-      <a href="https://wa.me/62895110018075?text=Halo%20kak%2C%20saya%20mau%20order%20cemilan%20Mimirro" target="_blank">
-        💬 Order Sekarang via WhatsApp
-      </a>
+    <div class="info-kirim">
+      📦 Pengiriman hanya melalui kurir (JNE / J&T / Sicepat / GoSend / Grab)
     </div>
 
     <footer>
-      Terima kasih sudah belanja 🙏<br>
-      Pengiriman via kurir
+      Terima kasih sudah belanja 🙏
     </footer>
   </div>
+
+  <script>
+    function order(namaProduk, idRasa, idJumlah, harga) {
+      const rasa = document.getElementById(idRasa).value;
+      const jumlah = document.getElementById(idJumlah).value;
+      const total = harga * jumlah;
+
+      // Ganti nomor di bawah dengan nomor WhatsApp kamu
+      const nomorWA = "62xxxxxxxxxx";
+
+      const pesan = `Halo kak, saya mau order:%0A%0A` +
+                    `*${namaProduk}*%0A` +
+                    `Rasa: ${rasa}%0A` +
+                    `Jumlah: ${jumlah}%0A` +
+                    `Total: Rp ${total.toLocaleString('id-ID')}%0A%0A` +
+                    `Pengiriman via kurir ya kak.`;
+
+      window.open(`https://wa.me/${nomorWA}?text=${pesan}`, '_blank');
+    }
+  </script>
 </body>
 </html>
