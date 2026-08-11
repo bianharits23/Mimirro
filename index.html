@@ -12,60 +12,101 @@
       color: #333;
       line-height: 1.5;
       padding: 20px;
+      padding-bottom: 120px;
     }
     .container { max-width: 700px; margin: 0 auto; }
-    header { text-align: center; margin-bottom: 30px; }
-    header h1 { font-size: 28px; color: #e67e22; margin-bottom: 8px; }
-    header p { color: #666; }
+    header { text-align: center; margin-bottom: 25px; }
+    header h1 { font-size: 26px; color: #e67e22; margin-bottom: 6px; }
+    header p { color: #666; font-size: 14px; }
     .produk {
       background: white;
       border-radius: 12px;
-      padding: 18px 20px;
-      margin-bottom: 16px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
       border-left: 5px solid #e67e22;
     }
-    .produk h2 { font-size: 18px; color: #2c3e50; margin-bottom: 6px; }
-    .harga { font-size: 20px; font-weight: bold; color: #27ae60; margin: 6px 0 12px; }
-    .label { font-size: 14px; color: #555; margin-bottom: 6px; display: block; }
+    .produk h2 { font-size: 17px; color: #2c3e50; margin-bottom: 4px; }
+    .harga { font-size: 18px; font-weight: bold; color: #27ae60; margin-bottom: 10px; }
+    .label { font-size: 13px; color: #555; margin-bottom: 4px; display: block; }
     select, input[type="number"] {
       width: 100%;
-      padding: 8px 12px;
+      padding: 7px 10px;
       border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 15px;
-      margin-bottom: 12px;
+      border-radius: 7px;
+      font-size: 14px;
+      margin-bottom: 10px;
     }
-    .tombol-wa {
-      display: inline-block;
-      background: #25D366;
+    .btn-tambah {
+      background: #e67e22;
       color: white;
-      padding: 10px 18px;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 15px;
       border: none;
+      padding: 8px 14px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: bold;
       cursor: pointer;
       width: 100%;
-      text-align: center;
     }
-    .tombol-wa:hover { background: #1da851; }
+    .btn-tambah:hover { background: #d35400; }
+
+    /* Keranjang */
+    .keranjang {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 2px solid #e67e22;
+      padding: 12px 16px;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+      z-index: 100;
+    }
+    .keranjang-isi {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .keranjang h3 {
+      font-size: 15px;
+      margin-bottom: 6px;
+      color: #e67e22;
+    }
+    #daftar-keranjang {
+      font-size: 13px;
+      max-height: 90px;
+      overflow-y: auto;
+      margin-bottom: 8px;
+      color: #444;
+    }
+    .total {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+    .btn-order {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: bold;
+      width: 100%;
+      cursor: pointer;
+    }
+    .btn-order:hover { background: #1da851; }
+    .btn-order:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
     .info-kirim {
       background: #fff3cd;
-      border: 1px solid #ffecb5;
       color: #856404;
-      padding: 12px 16px;
+      padding: 10px;
       border-radius: 8px;
-      margin: 25px 0 10px;
-      font-size: 14px;
+      font-size: 13px;
       text-align: center;
-    }
-    footer {
-      text-align: center;
-      margin-top: 20px;
-      color: #999;
-      font-size: 14px;
+      margin: 15px 0;
     }
   </style>
 </head>
@@ -76,7 +117,7 @@
       <p>Cemilan renyah, enak, dan fresh setiap hari</p>
     </header>
 
-    <!-- Keripik Pangsit -->
+    <!-- Produk 1 -->
     <div class="produk">
       <h2>Keripik Pangsit</h2>
       <div class="harga">Rp 7.000</div>
@@ -88,12 +129,10 @@
       </select>
       <label class="label">Jumlah:</label>
       <input type="number" id="jumlah-pangsit" value="1" min="1">
-      <button class="tombol-wa" onclick="order('Keripik Pangsit', 'rasa-pangsit', 'jumlah-pangsit', 7000)">
-        💬 Order via WhatsApp
-      </button>
+      <button class="btn-tambah" onclick="tambah('Keripik Pangsit', 'rasa-pangsit', 'jumlah-pangsit', 7000)">+ Tambah ke Keranjang</button>
     </div>
 
-    <!-- Makroni Mekar -->
+    <!-- Produk 2 -->
     <div class="produk">
       <h2>Makroni Mekar</h2>
       <div class="harga">Rp 7.000</div>
@@ -105,12 +144,10 @@
       </select>
       <label class="label">Jumlah:</label>
       <input type="number" id="jumlah-makroni" value="1" min="1">
-      <button class="tombol-wa" onclick="order('Makroni Mekar', 'rasa-makroni', 'jumlah-makroni', 7000)">
-        💬 Order via WhatsApp
-      </button>
+      <button class="btn-tambah" onclick="tambah('Makroni Mekar', 'rasa-makroni', 'jumlah-makroni', 7000)">+ Tambah ke Keranjang</button>
     </div>
 
-    <!-- Kerupuk Pelangi -->
+    <!-- Produk 3 -->
     <div class="produk">
       <h2>Kerupuk Pelangi</h2>
       <div class="harga">Rp 13.000</div>
@@ -120,12 +157,10 @@
       </select>
       <label class="label">Jumlah:</label>
       <input type="number" id="jumlah-kerupuk" value="1" min="1">
-      <button class="tombol-wa" onclick="order('Kerupuk Pelangi', 'rasa-kerupuk', 'jumlah-kerupuk', 13000)">
-        💬 Order via WhatsApp
-      </button>
+      <button class="btn-tambah" onclick="tambah('Kerupuk Pelangi', 'rasa-kerupuk', 'jumlah-kerupuk', 13000)">+ Tambah ke Keranjang</button>
     </div>
 
-    <!-- Kentang Kering -->
+    <!-- Produk 4 -->
     <div class="produk">
       <h2>Kentang Kering</h2>
       <div class="harga">Rp 23.000</div>
@@ -137,12 +172,10 @@
       </select>
       <label class="label">Jumlah:</label>
       <input type="number" id="jumlah-kentang" value="1" min="1">
-      <button class="tombol-wa" onclick="order('Kentang Kering', 'rasa-kentang', 'jumlah-kentang', 23000)">
-        💬 Order via WhatsApp
-      </button>
+      <button class="btn-tambah" onclick="tambah('Kentang Kering', 'rasa-kentang', 'jumlah-kentang', 23000)">+ Tambah ke Keranjang</button>
     </div>
 
-    <!-- Stik Tales -->
+    <!-- Produk 5 -->
     <div class="produk">
       <h2>Stik Tales</h2>
       <div class="harga">Rp 23.000</div>
@@ -154,35 +187,88 @@
       </select>
       <label class="label">Jumlah:</label>
       <input type="number" id="jumlah-stik" value="1" min="1">
-      <button class="tombol-wa" onclick="order('Stik Tales', 'rasa-stik', 'jumlah-stik', 23000)">
-        💬 Order via WhatsApp
-      </button>
+      <button class="btn-tambah" onclick="tambah('Stik Tales', 'rasa-stik', 'jumlah-stik', 23000)">+ Tambah ke Keranjang</button>
     </div>
 
     <div class="info-kirim">
       📦 Pengiriman hanya melalui kurir (JNE / J&T / Sicepat / GoSend / Grab)
     </div>
+  </div>
 
-    <footer>
-      Terima kasih sudah belanja 🙏
-    </footer>
+  <!-- Keranjang Fixed di Bawah -->
+  <div class="keranjang">
+    <div class="keranjang-isi">
+      <h3>🛒 Keranjang</h3>
+      <div id="daftar-keranjang">Belum ada item</div>
+      <div class="total">Total: Rp <span id="total-harga">0</span></div>
+      <button class="btn-order" id="btn-order" onclick="kirimWA()" disabled>
+        💬 Order via WhatsApp
+      </button>
+    </div>
   </div>
 
   <script>
-    function order(namaProduk, idRasa, idJumlah, harga) {
+    let keranjang = [];
+
+    // Ganti nomor WhatsApp di sini
+    const nomorWA = "62xxxxxxxxxx";
+
+    function tambah(nama, idRasa, idJumlah, harga) {
       const rasa = document.getElementById(idRasa).value;
-      const jumlah = document.getElementById(idJumlah).value;
-      const total = harga * jumlah;
+      const jumlah = parseInt(document.getElementById(idJumlah).value) || 1;
 
-      // Ganti nomor di bawah dengan nomor WhatsApp kamu
-      const nomorWA = "62895110018075";
+      // Cek apakah item yang sama (nama + rasa) sudah ada
+      const index = keranjang.findIndex(item => item.nama === nama && item.rasa === rasa);
 
-      const pesan = `Halo kak, saya mau order:%0A%0A` +
-                    `*${namaProduk}*%0A` +
-                    `Rasa: ${rasa}%0A` +
-                    `Jumlah: ${jumlah}%0A` +
-                    `Total: Rp ${total.toLocaleString('id-ID')}%0A%0A` +
-                    `Pengiriman via kurir ya kak.`;
+      if (index > -1) {
+        keranjang[index].jumlah += jumlah;
+      } else {
+        keranjang.push({ nama, rasa, jumlah, harga });
+      }
+
+      updateKeranjang();
+    }
+
+    function updateKeranjang() {
+      const daftar = document.getElementById('daftar-keranjang');
+      const totalSpan = document.getElementById('total-harga');
+      const btn = document.getElementById('btn-order');
+
+      if (keranjang.length === 0) {
+        daftar.innerHTML = 'Belum ada item';
+        totalSpan.innerText = '0';
+        btn.disabled = true;
+        return;
+      }
+
+      let html = '';
+      let total = 0;
+
+      keranjang.forEach((item, i) => {
+        const subtotal = item.harga * item.jumlah;
+        total += subtotal;
+        html += `${item.nama} (${item.rasa}) x${item.jumlah} = Rp ${subtotal.toLocaleString('id-ID')}<br>`;
+      });
+
+      daftar.innerHTML = html;
+      totalSpan.innerText = total.toLocaleString('id-ID');
+      btn.disabled = false;
+    }
+
+    function kirimWA() {
+      if (keranjang.length === 0) return;
+
+      let pesan = "Halo kak, saya mau order:%0A%0A";
+      let total = 0;
+
+      keranjang.forEach(item => {
+        const subtotal = item.harga * item.jumlah;
+        total += subtotal;
+        pesan += `• *${item.nama}* (${item.rasa}) x${item.jumlah} = Rp ${subtotal.toLocaleString('id-ID')}%0A`;
+      });
+
+      pesan += `%0A*Total: Rp ${total.toLocaleString('id-ID')}*%0A%0A`;
+      pesan += `Pengiriman via kurir ya kak.`;
 
       window.open(`https://wa.me/${nomorWA}?text=${pesan}`, '_blank');
     }
