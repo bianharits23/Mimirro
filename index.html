@@ -12,7 +12,7 @@
       color: #333;
       line-height: 1.5;
       padding: 20px;
-      padding-bottom: 120px;
+      padding-bottom: 160px;
     }
     .container { max-width: 700px; margin: 0 auto; }
     header { text-align: center; margin-bottom: 25px; }
@@ -68,16 +68,35 @@
     }
     .keranjang h3 {
       font-size: 15px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       color: #e67e22;
     }
     #daftar-keranjang {
       font-size: 13px;
-      max-height: 90px;
+      max-height: 110px;
       overflow-y: auto;
       margin-bottom: 8px;
       color: #444;
     }
+    .item-keranjang {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .item-keranjang:last-child { border-bottom: none; }
+    .btn-hapus {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+    .btn-hapus:hover { background: #c0392b; }
     .total {
       font-weight: bold;
       font-size: 16px;
@@ -195,7 +214,7 @@
     </div>
   </div>
 
-  <!-- Keranjang Fixed di Bawah -->
+  <!-- Keranjang Fixed -->
   <div class="keranjang">
     <div class="keranjang-isi">
       <h3>🛒 Keranjang</h3>
@@ -209,15 +228,12 @@
 
   <script>
     let keranjang = [];
-
-    // Ganti nomor WhatsApp di sini
-    const nomorWA = "62895110018075";
+    const nomorWA = "62895110018075"; // Ganti nomor WhatsApp di sini
 
     function tambah(nama, idRasa, idJumlah, harga) {
       const rasa = document.getElementById(idRasa).value;
       const jumlah = parseInt(document.getElementById(idJumlah).value) || 1;
 
-      // Cek apakah item yang sama (nama + rasa) sudah ada
       const index = keranjang.findIndex(item => item.nama === nama && item.rasa === rasa);
 
       if (index > -1) {
@@ -226,6 +242,11 @@
         keranjang.push({ nama, rasa, jumlah, harga });
       }
 
+      updateKeranjang();
+    }
+
+    function hapus(index) {
+      keranjang.splice(index, 1);
       updateKeranjang();
     }
 
@@ -247,7 +268,12 @@
       keranjang.forEach((item, i) => {
         const subtotal = item.harga * item.jumlah;
         total += subtotal;
-        html += `${item.nama} (${item.rasa}) x${item.jumlah} = Rp ${subtotal.toLocaleString('id-ID')}<br>`;
+        html += `
+          <div class="item-keranjang">
+            <span>${item.nama} (${item.rasa}) x${item.jumlah} = Rp ${subtotal.toLocaleString('id-ID')}</span>
+            <button class="btn-hapus" onclick="hapus(${i})">Hapus</button>
+          </div>
+        `;
       });
 
       daftar.innerHTML = html;
