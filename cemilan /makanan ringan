@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mimirro - Jual Cemilan</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #fff8f0;
+      color: #333;
+      line-height: 1.5;
+      padding: 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    header h1 {
+      font-size: 28px;
+      color: #e67e22;
+      margin-bottom: 8px;
+    }
+    header p {
+      color: #666;
+    }
+    .produk {
+      background: white;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      border-left: 5px solid #e67e22;
+    }
+    .produk h2 {
+      font-size: 18px;
+      color: #2c3e50;
+      margin-bottom: 6px;
+    }
+    .harga {
+      font-size: 20px;
+      font-weight: bold;
+      color: #27ae60;
+      margin: 6px 0;
+    }
+    .rasa {
+      font-size: 14px;
+      color: #555;
+      background: #f1f1f1;
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-right: 6px;
+      margin-top: 4px;
+    }
+    .keterangan {
+      font-size: 13px;
+      color: #888;
+      margin-top: 6px;
+    }
+    .order-box {
+      background: #25D366;
+      color: white;
+      text-align: center;
+      padding: 18px;
+      border-radius: 12px;
+      margin-top: 30px;
+    }
+    .order-box a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #999;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🍿 Mimirro - Jual Cemilan</h1>
+      <p>Cemilan renyah, enak, dan fresh setiap hari</p>
+    </header>
+
+    <div class="produk">
+      <h2>Keripik Pangsit</h2>
+      <div class="harga">Rp 7.000</div>
+      <span class="rasa">Asin</span>
+      <span class="rasa">Sedang</span>
+      <span class="rasa">Pedas</span>
+    </div>
+
+    <div class="produk">
+      <h2>Makroni Mekar</h2>
+      <div class="harga">Rp 7.000</div>
+      <span class="rasa">Asin</span>
+      <span class="rasa">Sedang</span>
+      <span class="rasa">Pedas</span>
+    </div>
+
+    <div class="produk">
+      <h2>Kerupuk Pelangi</h2>
+      <div class="harga">Rp 13.000</div>
+      <span class="rasa">Chili Oil (Daun Jeruk)</span>
+      <div class="keterangan">Kerupuk bawang</div>
+    </div>
+
+    <div class="produk">
+      <h2>Kentang Kering</h2>
+      <div class="harga">Rp 23.000</div>
+      <span class="rasa">Asin</span>
+      <span class="rasa">Sedang</span>
+      <span class="rasa">Pedas</span>
+    </div>
+
+    <div class="produk">
+      <h2>Stik Tales</h2>
+      <div class="harga">Rp 23.000</div>
+      <span class="rasa">Asin</span>
+      <span class="rasa">Sedang</span>
+      <span class="rasa">Pedas</span>
+    </div>
+
+    <div class="order-box">
+      <a href="https://wa.me/62xxxxxxxxxx?text=Halo%20kak%2C%20saya%20mau%20order%20cemilan%20Mimirro" target="_blank">
+        💬 Order Sekarang via WhatsApp
+      </a>
+    </div>
+
+    <footer>
+      Terima kasih sudah belanja 🙏<br>
+      Pengiriman via JNE / J&T / Sicepat / GoSend
+    </footer>
+  </div>
+</body>
+</html>
