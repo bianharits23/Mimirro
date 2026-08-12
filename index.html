@@ -29,7 +29,6 @@
     .produk img {
       width: 100%;
       height: auto;
-      max-height: none;
       object-fit: contain;
       border-radius: 10px;
       margin-bottom: 12px;
@@ -45,6 +44,28 @@
       border-radius: 7px;
       font-size: 14px;
       margin-bottom: 10px;
+    }
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .qty-control button {
+      width: 36px;
+      height: 36px;
+      border: 1px solid #ddd;
+      background: #f5f5f5;
+      border-radius: 7px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .qty-control button:hover { background: #eee; }
+    .qty-control input {
+      width: 70px;
+      text-align: center;
+      margin-bottom: 0;
     }
     .btn-tambah {
       background: #e67e22;
@@ -137,12 +158,17 @@
       <div class="harga">Rp 7.000</div>
       <label class="label">Pilih Rasa:</label>
       <select id="rasa-pangsit">
+        <option value="">Pilih Rasa</option>
         <option value="Asin">Asin</option>
         <option value="Sedang">Sedang</option>
         <option value="Pedas">Pedas</option>
       </select>
       <label class="label">Jumlah:</label>
-      <input type="number" id="jumlah-pangsit" value="1" min="1">
+      <div class="qty-control">
+        <button type="button" onclick="ubahJumlah('jumlah-pangsit', -1)">−</button>
+        <input type="number" id="jumlah-pangsit" value="0" min="0">
+        <button type="button" onclick="ubahJumlah('jumlah-pangsit', 1)">+</button>
+      </div>
       <button class="btn-tambah" onclick="tambah('Keripik Pangsit', 'rasa-pangsit', 'jumlah-pangsit', 7000)">+ Tambah ke Keranjang</button>
     </div>
 
@@ -153,12 +179,17 @@
       <div class="harga">Rp 7.000</div>
       <label class="label">Pilih Rasa:</label>
       <select id="rasa-makroni">
+        <option value="">Pilih Rasa</option>
         <option value="Asin">Asin</option>
         <option value="Sedang">Sedang</option>
         <option value="Pedas">Pedas</option>
       </select>
       <label class="label">Jumlah:</label>
-      <input type="number" id="jumlah-makroni" value="1" min="1">
+      <div class="qty-control">
+        <button type="button" onclick="ubahJumlah('jumlah-makroni', -1)">−</button>
+        <input type="number" id="jumlah-makroni" value="0" min="0">
+        <button type="button" onclick="ubahJumlah('jumlah-makroni', 1)">+</button>
+      </div>
       <button class="btn-tambah" onclick="tambah('Makroni Mekar', 'rasa-makroni', 'jumlah-makroni', 7000)">+ Tambah ke Keranjang</button>
     </div>
 
@@ -169,10 +200,15 @@
       <div class="harga">Rp 13.000</div>
       <label class="label">Rasa:</label>
       <select id="rasa-kerupuk">
+        <option value="">Pilih Rasa</option>
         <option value="Chili Oil (Daun Jeruk)">Chili Oil (Daun Jeruk)</option>
       </select>
       <label class="label">Jumlah:</label>
-      <input type="number" id="jumlah-kerupuk" value="1" min="1">
+      <div class="qty-control">
+        <button type="button" onclick="ubahJumlah('jumlah-kerupuk', -1)">−</button>
+        <input type="number" id="jumlah-kerupuk" value="0" min="0">
+        <button type="button" onclick="ubahJumlah('jumlah-kerupuk', 1)">+</button>
+      </div>
       <button class="btn-tambah" onclick="tambah('Kerupuk Pelangi', 'rasa-kerupuk', 'jumlah-kerupuk', 13000)">+ Tambah ke Keranjang</button>
     </div>
 
@@ -183,12 +219,17 @@
       <div class="harga">Rp 23.000</div>
       <label class="label">Pilih Rasa:</label>
       <select id="rasa-kentang">
+        <option value="">Pilih Rasa</option>
         <option value="Asin">Asin</option>
         <option value="Sedang">Sedang</option>
         <option value="Pedas">Pedas</option>
       </select>
       <label class="label">Jumlah:</label>
-      <input type="number" id="jumlah-kentang" value="1" min="1">
+      <div class="qty-control">
+        <button type="button" onclick="ubahJumlah('jumlah-kentang', -1)">−</button>
+        <input type="number" id="jumlah-kentang" value="0" min="0">
+        <button type="button" onclick="ubahJumlah('jumlah-kentang', 1)">+</button>
+      </div>
       <button class="btn-tambah" onclick="tambah('Kentang Kering', 'rasa-kentang', 'jumlah-kentang', 23000)">+ Tambah ke Keranjang</button>
     </div>
 
@@ -199,12 +240,17 @@
       <div class="harga">Rp 23.000</div>
       <label class="label">Pilih Rasa:</label>
       <select id="rasa-stik">
+        <option value="">Pilih Rasa</option>
         <option value="Asin">Asin</option>
         <option value="Sedang">Sedang</option>
         <option value="Pedas">Pedas</option>
       </select>
       <label class="label">Jumlah:</label>
-      <input type="number" id="jumlah-stik" value="1" min="1">
+      <div class="qty-control">
+        <button type="button" onclick="ubahJumlah('jumlah-stik', -1)">−</button>
+        <input type="number" id="jumlah-stik" value="0" min="0">
+        <button type="button" onclick="ubahJumlah('jumlah-stik', 1)">+</button>
+      </div>
       <button class="btn-tambah" onclick="tambah('Stik Tales', 'rasa-stik', 'jumlah-stik', 23000)">+ Tambah ke Keranjang</button>
     </div>
 
@@ -229,9 +275,22 @@
     let keranjang = [];
     const nomorWA = "62895110018075"; // Ganti nomor WhatsApp kamu
 
+    function ubahJumlah(id, delta) {
+      const input = document.getElementById(id);
+      let nilai = parseInt(input.value) || 0;
+      nilai += delta;
+      if (nilai < 0) nilai = 0;
+      input.value = nilai;
+    }
+
     function tambah(nama, idRasa, idJumlah, harga) {
       const rasa = document.getElementById(idRasa).value;
-      const jumlah = parseInt(document.getElementById(idJumlah).value) || 1;
+      const jumlah = parseInt(document.getElementById(idJumlah).value) || 0;
+
+      if (!rasa || jumlah <= 0) {
+        alert("Silakan pilih rasa dan jumlahnya dulu");
+        return;
+      }
 
       const index = keranjang.findIndex(item => item.nama === nama && item.rasa === rasa);
 
