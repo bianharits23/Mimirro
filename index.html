@@ -12,7 +12,7 @@
       color: #333;
       line-height: 1.5;
       padding: 20px;
-      padding-bottom: 160px;
+      padding-bottom: 170px;
     }
     .container { max-width: 700px; margin: 0 auto; }
     header { text-align: center; margin-bottom: 25px; }
@@ -22,9 +22,16 @@
       background: white;
       border-radius: 12px;
       padding: 16px 18px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
       border-left: 5px solid #e67e22;
+    }
+    .produk img {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 12px;
     }
     .produk h2 { font-size: 17px; color: #2c3e50; margin-bottom: 4px; }
     .harga { font-size: 18px; font-weight: bold; color: #27ae60; margin-bottom: 10px; }
@@ -41,7 +48,7 @@
       background: #e67e22;
       color: white;
       border: none;
-      padding: 8px 14px;
+      padding: 9px 14px;
       border-radius: 7px;
       font-size: 14px;
       font-weight: bold;
@@ -50,7 +57,6 @@
     }
     .btn-tambah:hover { background: #d35400; }
 
-    /* Keranjang */
     .keranjang {
       position: fixed;
       bottom: 0;
@@ -62,15 +68,8 @@
       box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
       z-index: 100;
     }
-    .keranjang-isi {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    .keranjang h3 {
-      font-size: 15px;
-      margin-bottom: 8px;
-      color: #e67e22;
-    }
+    .keranjang-isi { max-width: 700px; margin: 0 auto; }
+    .keranjang h3 { font-size: 15px; margin-bottom: 8px; color: #e67e22; }
     #daftar-keranjang {
       font-size: 13px;
       max-height: 110px;
@@ -97,11 +96,7 @@
       margin-left: 8px;
     }
     .btn-hapus:hover { background: #c0392b; }
-    .total {
-      font-weight: bold;
-      font-size: 16px;
-      margin-bottom: 8px;
-    }
+    .total { font-weight: bold; font-size: 16px; margin-bottom: 8px; }
     .btn-order {
       background: #25D366;
       color: white;
@@ -114,10 +109,7 @@
       cursor: pointer;
     }
     .btn-order:hover { background: #1da851; }
-    .btn-order:disabled {
-      background: #ccc;
-      cursor: not-allowed;
-    }
+    .btn-order:disabled { background: #ccc; cursor: not-allowed; }
     .info-kirim {
       background: #fff3cd;
       color: #856404;
@@ -136,8 +128,9 @@
       <p>Cemilan renyah, enak, dan fresh setiap hari</p>
     </header>
 
-    <!-- Produk 1 -->
+    <!-- Keripik Pangsit -->
     <div class="produk">
+      <img src="PANGSIT.jpg" alt="Keripik Pangsit">
       <h2>Keripik Pangsit</h2>
       <div class="harga">Rp 7.000</div>
       <label class="label">Pilih Rasa:</label>
@@ -151,8 +144,9 @@
       <button class="btn-tambah" onclick="tambah('Keripik Pangsit', 'rasa-pangsit', 'jumlah-pangsit', 7000)">+ Tambah ke Keranjang</button>
     </div>
 
-    <!-- Produk 2 -->
+    <!-- Makroni Mekar -->
     <div class="produk">
+      <img src="MAKARONI.jpg" alt="Makroni Mekar">
       <h2>Makroni Mekar</h2>
       <div class="harga">Rp 7.000</div>
       <label class="label">Pilih Rasa:</label>
@@ -166,8 +160,9 @@
       <button class="btn-tambah" onclick="tambah('Makroni Mekar', 'rasa-makroni', 'jumlah-makroni', 7000)">+ Tambah ke Keranjang</button>
     </div>
 
-    <!-- Produk 3 -->
+    <!-- Kerupuk Pelangi -->
     <div class="produk">
+      <img src="KERUPUK.jpg" alt="Kerupuk Pelangi">
       <h2>Kerupuk Pelangi</h2>
       <div class="harga">Rp 13.000</div>
       <label class="label">Rasa:</label>
@@ -179,8 +174,9 @@
       <button class="btn-tambah" onclick="tambah('Kerupuk Pelangi', 'rasa-kerupuk', 'jumlah-kerupuk', 13000)">+ Tambah ke Keranjang</button>
     </div>
 
-    <!-- Produk 4 -->
+    <!-- Kentang Kering -->
     <div class="produk">
+      <img src="KENTANG.jpg" alt="Kentang Kering">
       <h2>Kentang Kering</h2>
       <div class="harga">Rp 23.000</div>
       <label class="label">Pilih Rasa:</label>
@@ -194,8 +190,9 @@
       <button class="btn-tambah" onclick="tambah('Kentang Kering', 'rasa-kentang', 'jumlah-kentang', 23000)">+ Tambah ke Keranjang</button>
     </div>
 
-    <!-- Produk 5 -->
+    <!-- Stik Tales -->
     <div class="produk">
+      <img src="STIK.jpg" alt="Stik Tales">
       <h2>Stik Tales</h2>
       <div class="harga">Rp 23.000</div>
       <label class="label">Pilih Rasa:</label>
@@ -214,7 +211,7 @@
     </div>
   </div>
 
-  <!-- Keranjang Fixed -->
+  <!-- Keranjang -->
   <div class="keranjang">
     <div class="keranjang-isi">
       <h3>🛒 Keranjang</h3>
@@ -228,7 +225,7 @@
 
   <script>
     let keranjang = [];
-    const nomorWA = "62895110018075"; // Ganti nomor WhatsApp di sini
+    const nomorWA = "62xxxxxxxxxx"; // Ganti dengan nomor WhatsApp kamu
 
     function tambah(nama, idRasa, idJumlah, harga) {
       const rasa = document.getElementById(idRasa).value;
@@ -241,7 +238,6 @@
       } else {
         keranjang.push({ nama, rasa, jumlah, harga });
       }
-
       updateKeranjang();
     }
 
