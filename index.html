@@ -12,7 +12,7 @@
       color: #333;
       line-height: 1.5;
       padding: 20px;
-      padding-bottom: 220px;
+      padding-bottom: 200px;
     }
     .container { max-width: 700px; margin: 0 auto; }
     header { text-align: center; margin-bottom: 25px; }
@@ -95,7 +95,7 @@
     .keranjang h3 { font-size: 15px; margin-bottom: 8px; color: #e67e22; }
     #daftar-keranjang {
       font-size: 13px;
-      max-height: 90px;
+      max-height: 80px;
       overflow-y: auto;
       margin-bottom: 8px;
       color: #444;
@@ -157,7 +157,6 @@
       margin: 15px 0;
     }
 
-    /* Modal Ringkasan */
     .modal {
       display: none;
       position: fixed;
@@ -167,19 +166,17 @@
       width: 100%;
       height: 100%;
       background: rgba(0,0,0,0.5);
+      overflow-y: auto;
     }
     .modal-content {
       background: white;
-      margin: 15% auto;
+      margin: 8% auto;
       padding: 20px;
       border-radius: 12px;
-      max-width: 400px;
-      width: 90%;
+      max-width: 420px;
+      width: 92%;
     }
-    .modal-content h3 {
-      color: #e67e22;
-      margin-bottom: 12px;
-    }
+    .modal-content h3 { color: #e67e22; margin-bottom: 12px; }
     .modal-content pre {
       background: #f8f8f8;
       padding: 12px;
@@ -188,11 +185,36 @@
       white-space: pre-wrap;
       margin-bottom: 15px;
     }
+    .qris-modal {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .qris-modal img {
+      max-width: 220px;
+      width: 100%;
+      border-radius: 8px;
+    }
+    .qris-modal p {
+      font-size: 13px;
+      color: #555;
+      margin-top: 8px;
+    }
     .modal-close {
       background: #e67e22;
       color: white;
       border: none;
-      padding: 8px 16px;
+      padding: 10px 16px;
+      border-radius: 7px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .modal-order {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 10px 16px;
       border-radius: 7px;
       cursor: pointer;
       width: 100%;
@@ -322,7 +344,7 @@
       <div id="daftar-keranjang">Belum ada item</div>
       <div class="total">Total: Rp <span id="total-harga">0</span></div>
       <button class="btn-ringkasan" id="btn-ringkasan" onclick="tampilkanRingkasan()" disabled>
-        📋 Lihat Ringkasan Pesanan
+        📋 Lihat Ringkasan + QRIS
       </button>
       <button class="btn-order" id="btn-order" onclick="kirimWA()" disabled>
         💬 Order via WhatsApp
@@ -330,12 +352,20 @@
     </div>
   </div>
 
-  <!-- Modal Ringkasan -->
+  <!-- Modal Ringkasan + QRIS -->
   <div id="modalRingkasan" class="modal">
     <div class="modal-content">
       <h3>📋 Ringkasan Pesanan</h3>
       <pre id="isiRingkasan"></pre>
-      <button class="modal-close" onclick="tutupModal()">Tutup</button>
+
+      <div class="qris-modal">
+        <p><strong>Scan QRIS untuk pembayaran:</strong></p>
+        <img src="QRIS.jpeg" alt="QRIS">
+        <p>Setelah transfer, klik tombol hijau di bawah<br>untuk kirim pesanan + konfirmasi sudah bayar</p>
+      </div>
+
+      <button class="modal-order" onclick="kirimWA()">💬 Saya Sudah Bayar - Order via WhatsApp</button>
+      <button class="modal-close" onclick="tutupModal()" style="background:#999; margin-top:8px;">Tutup</button>
     </div>
   </div>
 
@@ -444,12 +474,13 @@
       });
 
       pesan += `%0A*Total: Rp ${total.toLocaleString('id-ID')}*%0A%0A`;
+      pesan += `✅ *Sudah bayar via QRIS*%0A%0A`;
       pesan += `Pengiriman via kurir ya kak.`;
 
       window.open(`https://wa.me/${nomorWA}?text=${pesan}`, '_blank');
+      tutupModal();
     }
 
-    // Tutup modal jika klik di luar
     window.onclick = function(e) {
       const modal = document.getElementById('modalRingkasan');
       if (e.target === modal) {
