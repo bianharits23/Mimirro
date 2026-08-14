@@ -12,7 +12,7 @@
       color: #333;
       line-height: 1.5;
       padding: 20px;
-      padding-bottom: 200px;
+      padding-bottom: 220px;
     }
     .container { max-width: 700px; margin: 0 auto; }
     header { text-align: center; margin-bottom: 25px; }
@@ -95,7 +95,7 @@
     .keranjang h3 { font-size: 15px; margin-bottom: 8px; color: #e67e22; }
     #daftar-keranjang {
       font-size: 13px;
-      max-height: 80px;
+      max-height: 70px;
       overflow-y: auto;
       margin-bottom: 8px;
       color: #444;
@@ -134,19 +134,18 @@
     }
     .btn-ringkasan:hover { background: #2980b9; }
     .btn-ringkasan:disabled { background: #ccc; cursor: not-allowed; }
-    .btn-order {
-      background: #25D366;
+    .btn-ecom {
+      background: #9b59b6;
       color: white;
       border: none;
       padding: 10px;
       border-radius: 8px;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
       width: 100%;
       cursor: pointer;
     }
-    .btn-order:hover { background: #1da851; }
-    .btn-order:disabled { background: #ccc; cursor: not-allowed; }
+    .btn-ecom:hover { background: #8e44ad; }
     .info-kirim {
       background: #fff3cd;
       color: #856404;
@@ -157,6 +156,7 @@
       margin: 15px 0;
     }
 
+    /* Modal umum */
     .modal {
       display: none;
       position: fixed;
@@ -176,7 +176,7 @@
       max-width: 420px;
       width: 92%;
     }
-    .modal-content h3 { color: #e67e22; margin-bottom: 12px; }
+    .modal-content h3 { color: #e67e22; margin-bottom: 12px; text-align: center; }
     .modal-content pre {
       background: #f8f8f8;
       padding: 12px;
@@ -219,6 +219,35 @@
       cursor: pointer;
       width: 100%;
       font-weight: bold;
+    }
+
+    /* E-commerce buttons */
+    .ecom-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .ecom-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+      color: white;
+    }
+    .ecom-btn.shopee { background: #ee4d2d; }
+    .ecom-btn.tiktok { background: #000000; }
+    .ecom-btn.tokopedia { background: #42b549; }
+    .ecom-btn.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .ecom-btn:hover { opacity: 0.9; }
+    .ecom-icon {
+      font-size: 22px;
+      width: 28px;
+      text-align: center;
     }
   </style>
 </head>
@@ -346,8 +375,8 @@
       <button class="btn-ringkasan" id="btn-ringkasan" onclick="tampilkanRingkasan()" disabled>
         📋 Lihat Ringkasan + QRIS
       </button>
-      <button class="btn-order" id="btn-order" onclick="kirimWA()" disabled>
-        💬 Order via WhatsApp
+      <button class="btn-ecom" onclick="tampilkanEcom()">
+        🛍️ Beli di E-commerce Kesayangan Anda
       </button>
     </div>
   </div>
@@ -365,7 +394,29 @@
       </div>
 
       <button class="modal-order" onclick="kirimWA()">💬 Order via WhatsApp</button>
-      <button class="modal-close" onclick="tutupModal()">Tutup</button>
+      <button class="modal-close" onclick="tutupModal('modalRingkasan')">Tutup</button>
+    </div>
+  </div>
+
+  <!-- Modal E-commerce -->
+  <div id="modalEcom" class="modal">
+    <div class="modal-content">
+      <h3>🛍️ Pilih E-commerce</h3>
+      <div class="ecom-list">
+        <a class="ecom-btn shopee" href="https://s.shopee.co.id/8AH0FK2yY8" target="_blank">
+          <span class="ecom-icon">🛒</span> Shopee
+        </a>
+        <a class="ecom-btn tiktok" href="https://www.tiktok.com/@babanavarro?_t=ZS-8wF16r4zaJb&_r=1" target="_blank">
+          <span class="ecom-icon">🎵</span> TikTok
+        </a>
+        <a class="ecom-btn tokopedia" href="https://tk.tokopedia.com/ZSUsfFgkb/" target="_blank">
+          <span class="ecom-icon">🟢</span> Tokopedia
+        </a>
+        <a class="ecom-btn instagram" href="https://www.instagram.com/baba_navarro?utm_source=qr" target="_blank">
+          <span class="ecom-icon">📸</span> Instagram
+        </a>
+      </div>
+      <button class="modal-close" style="margin-top:15px;" onclick="tutupModal('modalEcom')">Tutup</button>
     </div>
   </div>
 
@@ -408,13 +459,11 @@
     function updateKeranjang() {
       const daftar = document.getElementById('daftar-keranjang');
       const totalSpan = document.getElementById('total-harga');
-      const btnOrder = document.getElementById('btn-order');
       const btnRingkasan = document.getElementById('btn-ringkasan');
 
       if (keranjang.length === 0) {
         daftar.innerHTML = 'Belum ada item';
         totalSpan.innerText = '0';
-        btnOrder.disabled = true;
         btnRingkasan.disabled = true;
         return;
       }
@@ -435,7 +484,6 @@
 
       daftar.innerHTML = html;
       totalSpan.innerText = total.toLocaleString('id-ID');
-      btnOrder.disabled = false;
       btnRingkasan.disabled = false;
     }
 
@@ -457,8 +505,12 @@
       document.getElementById('modalRingkasan').style.display = 'block';
     }
 
-    function tutupModal() {
-      document.getElementById('modalRingkasan').style.display = 'none';
+    function tampilkanEcom() {
+      document.getElementById('modalEcom').style.display = 'block';
+    }
+
+    function tutupModal(id) {
+      document.getElementById(id).style.display = 'none';
     }
 
     function kirimWA() {
@@ -477,13 +529,12 @@
       pesan += `Pengiriman via kurir ya kak.`;
 
       window.open(`https://wa.me/${nomorWA}?text=${pesan}`, '_blank');
-      tutupModal();
+      tutupModal('modalRingkasan');
     }
 
     window.onclick = function(e) {
-      const modal = document.getElementById('modalRingkasan');
-      if (e.target === modal) {
-        modal.style.display = 'none';
+      if (e.target.classList.contains('modal')) {
+        e.target.style.display = 'none';
       }
     }
   </script>
